@@ -8,8 +8,8 @@
             font-family: Arial, sans-serif;
             background: #0f172a;
             color: white;
-            text-align: center;
             padding: 20px;
+            text-align: center;
         }
 
         h1 {
@@ -20,7 +20,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            max-width: 900px;
+            max-width: 1200px;
             margin: auto;
         }
 
@@ -30,19 +30,26 @@
             border-radius: 10px;
         }
 
+        .semester {
+            background: #334155;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
         input {
-            width: 80%;
-            padding: 8px;
-            margin: 6px 0;
+            width: 90%;
+            padding: 6px;
+            margin: 4px 0;
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
             border-radius: 6px;
             border: none;
         }
 
         button {
             margin-top: 20px;
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 16px;
             border-radius: 8px;
             border: none;
@@ -64,29 +71,115 @@
 <h1>High School GPA Calculator</h1>
 
 <div class="grid">
+
+    <!-- Grade 9 -->
     <div class="year">
         <h2>Grade 9</h2>
-        <input placeholder="Semester 1" class="grade">
-        <input placeholder="Semester 2" class="grade">
+
+        <div class="semester">
+            <h4>Semester 1</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
+
+        <div class="semester">
+            <h4>Semester 2</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
     </div>
 
+    <!-- Grade 10 -->
     <div class="year">
         <h2>Grade 10</h2>
-        <input placeholder="Semester 1" class="grade">
-        <input placeholder="Semester 2" class="grade">
+
+        <div class="semester">
+            <h4>Semester 1</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
+
+        <div class="semester">
+            <h4>Semester 2</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
     </div>
 
+    <!-- Grade 11 -->
     <div class="year">
         <h2>Grade 11</h2>
-        <input placeholder="Semester 1" class="grade">
-        <input placeholder="Semester 2" class="grade">
+
+        <div class="semester">
+            <h4>Semester 1</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
+
+        <div class="semester">
+            <h4>Semester 2</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
     </div>
 
+    <!-- Grade 12 -->
     <div class="year">
         <h2>Grade 12</h2>
-        <input placeholder="Semester 1" class="grade">
-        <input placeholder="Semester 2" class="grade">
+
+        <div class="semester">
+            <h4>Semester 1</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
+
+        <div class="semester">
+            <h4>Semester 2</h4>
+            <input class="grade" placeholder="Class 1">
+            <input class="grade" placeholder="Class 2">
+            <input class="grade" placeholder="Class 3">
+            <input class="grade" placeholder="Class 4">
+            <input class="grade" placeholder="Class 5">
+            <input class="grade" placeholder="Class 6">
+            <input class="grade" placeholder="Class 7">
+        </div>
     </div>
+
 </div>
 
 <button onclick="calculateGPA()">Calculate GPA</button>
@@ -95,33 +188,29 @@
 
 <script>
     function calculateGPA() {
-        const gradeMap = {
-            "A": 4,
-            "B": 3,
-            "C": 2,
-            "D": 1,
-            "F": 0
-        };
+        const gradeMap = { A:4, B:3, C:2, D:1, F:0 };
+        const grades = document.querySelectorAll(".grade");
 
-        const inputs = document.querySelectorAll(".grade");
         let totalPoints = 0;
         let count = 0;
 
-        inputs.forEach(input => {
-            const grade = input.value.trim().toUpperCase();
-            if (gradeMap.hasOwnProperty(grade)) {
-                totalPoints += gradeMap[grade];
+        grades.forEach(input => {
+            const g = input.value.trim().toUpperCase();
+            if (gradeMap[g] !== undefined) {
+                totalPoints += gradeMap[g];
                 count++;
             }
         });
 
         if (count === 0) {
-            document.getElementById("result").textContent = "Enter at least one valid grade.";
+            document.getElementById("result").textContent =
+                "Please enter at least one valid grade (A–F).";
             return;
         }
 
         const gpa = (totalPoints / count).toFixed(2);
-        document.getElementById("result").textContent = `Your GPA is ${gpa}`;
+        document.getElementById("result").textContent =
+            `GPA: ${gpa} (based on ${count} classes)`;
     }
 </script>
 
