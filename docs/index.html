@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>High School GPA Calculator</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #0f172a;
             color: white;
-            padding: 20px;
             text-align: center;
-        }
-
-        h1 {
-            margin-bottom: 20px;
+            padding: 20px;
         }
 
         .grid {
@@ -42,21 +39,25 @@
             padding: 6px;
             margin: 4px 0;
             text-align: center;
-            font-size: 14px;
             border-radius: 6px;
             border: none;
         }
 
         button {
-            margin-top: 20px;
-            padding: 12px 30px;
-            font-size: 16px;
-            border-radius: 8px;
+            margin-top: 5px;
+            padding: 6px 10px;
+            border-radius: 6px;
             border: none;
             cursor: pointer;
             background: #38bdf8;
             color: black;
             font-weight: bold;
+        }
+
+        #calcBtn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 16px;
         }
 
         #result {
@@ -66,151 +67,76 @@
         }
     </style>
 </head>
+
 <body>
 
 <h1>High School GPA Calculator</h1>
 
 <div class="grid">
 
-    <!-- Grade 9 -->
-    <div class="year">
-        <h2>Grade 9</h2>
+    <!-- TEMPLATE USED FOR ALL YEARS -->
+    <script>
+        const years = [9,10,11,12];
+        document.write(
+            years.map(y => `
+            <div class="year">
+                <h2>Grade ${y}</h2>
 
-        <div class="semester">
-            <h4>Semester 1</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-
-        <div class="semester">
-            <h4>Semester 2</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-    </div>
-
-    <!-- Grade 10 -->
-    <div class="year">
-        <h2>Grade 10</h2>
-
-        <div class="semester">
-            <h4>Semester 1</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-
-        <div class="semester">
-            <h4>Semester 2</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-    </div>
-
-    <!-- Grade 11 -->
-    <div class="year">
-        <h2>Grade 11</h2>
-
-        <div class="semester">
-            <h4>Semester 1</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-
-        <div class="semester">
-            <h4>Semester 2</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-    </div>
-
-    <!-- Grade 12 -->
-    <div class="year">
-        <h2>Grade 12</h2>
-
-        <div class="semester">
-            <h4>Semester 1</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-
-        <div class="semester">
-            <h4>Semester 2</h4>
-            <input class="grade" placeholder="Class 1">
-            <input class="grade" placeholder="Class 2">
-            <input class="grade" placeholder="Class 3">
-            <input class="grade" placeholder="Class 4">
-            <input class="grade" placeholder="Class 5">
-            <input class="grade" placeholder="Class 6">
-            <input class="grade" placeholder="Class 7">
-        </div>
-    </div>
+                ${[1,2].map(s => `
+                <div class="semester">
+                    <h4>Semester ${s}</h4>
+                    <div class="classes">
+                        <input class="grade" placeholder="Class 1">
+                    </div>
+                    <button onclick="addClass(this)">+ Add Class</button>
+                </div>
+                `).join("")}
+            </div>
+            `).join("")
+        );
+    </script>
 
 </div>
 
-<button onclick="calculateGPA()">Calculate GPA</button>
+<button id="calcBtn" onclick="calculateGPA()">Calculate GPA</button>
 
 <div id="result"></div>
 
 <script>
+    function addClass(button) {
+        const container = button.previousElementSibling;
+        const count = container.children.length + 1;
+
+        const input = document.createElement("input");
+        input.className = "grade";
+        input.placeholder = "Class " + count;
+
+        container.appendChild(input);
+    }
+
     function calculateGPA() {
         const gradeMap = { A:4, B:3, C:2, D:1, F:0 };
-        const grades = document.querySelectorAll(".grade");
+        const inputs = document.querySelectorAll(".grade");
 
-        let totalPoints = 0;
+        let total = 0;
         let count = 0;
 
-        grades.forEach(input => {
-            const g = input.value.trim().toUpperCase();
+        inputs.forEach(i => {
+            const g = i.value.trim().toUpperCase();
             if (gradeMap[g] !== undefined) {
-                totalPoints += gradeMap[g];
+                total += gradeMap[g];
                 count++;
             }
         });
 
         if (count === 0) {
             document.getElementById("result").textContent =
-                "Please enter at least one valid grade (A–F).";
+                "Enter at least one valid grade.";
             return;
         }
 
-        const gpa = (totalPoints / count).toFixed(2);
         document.getElementById("result").textContent =
-            `GPA: ${gpa} (based on ${count} classes)`;
+            `GPA: ${(total / count).toFixed(2)} (from ${count} classes)`;
     }
 </script>
 
