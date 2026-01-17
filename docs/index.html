@@ -23,8 +23,30 @@
 
         h1 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
             color: var(--green);
+        }
+
+        .byline {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            background: var(--card);
+            padding: 18px 22px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .intro strong {
+            color: var(--pink);
         }
 
         .grid {
@@ -110,6 +132,16 @@
 <body>
 
 <h1>🍉 High School GPA Calculator</h1>
+<div class="byline">By: Sid Shah</div>
+
+<div class="intro">
+    <strong>How to Use This Calculator:</strong><br>
+    This calculator is only for counties using <strong>semester-based GPAs</strong>.
+    Simply add your <strong>SEMESTER letter grade</strong> (e.g. A, B, C, D)
+    to each class for each year (typically 14 grades total).
+    If you haven’t taken 7 classes or haven’t reached a grade yet,
+    just leave it blank — calculations stay the same.
+</div>
 
 <div class="grid" id="grid"></div>
 
