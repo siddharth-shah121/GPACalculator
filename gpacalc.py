@@ -1,0 +1,210 @@
+#/<!DOCTYPE html>
+# <html lang="en">
+# <head>
+# <meta charset="UTF-8">
+# <title>GPA Calculator</title>
+#
+# <style>
+# :root {
+#     --pink: #ff6f91;
+#         --green: #4caf50;
+# --light: #fff7f9;
+# --card: #ffffff;
+# --text: #333;
+# }
+#
+# body {
+#     margin: 0;
+# font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+# background: linear-gradient(135deg, #ffdde5, #e8fbe8);
+# color: var(--text);
+# padding: 30px;
+# }
+#
+# h1 {
+#     text-align: center;
+# margin-bottom: 5px;
+# color: var(--green);
+# }
+#
+# .byline {
+#     text-align: center;
+# font-size: 14px;
+# color: #666;
+# margin-bottom: 20px;
+# }
+#
+# .intro {
+#     max-width: 900px;
+# margin: 0 auto 30px;
+# background: var(--card);
+# padding: 18px 22px;
+# border-radius: 16px;
+# box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+# font-size: 15px;
+# line-height: 1.5;
+# }
+#
+# .intro strong {
+#     color: var(--pink);
+# }
+#
+# .grid {
+#     display: grid;
+# grid-template-columns: repeat(4, 1fr);
+# gap: 20px;
+# max-width: 1200px;
+# margin: auto;
+# }
+#
+# .year {
+#     background: var(--card);
+# border-radius: 18px;
+# padding: 18px;
+# box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+# }
+#
+# .year h2 {
+#     text-align: center;
+# margin-bottom: 12px;
+# color: var(--pink);
+# }
+#
+# .semester {
+#     background: var(--light);
+# border-radius: 14px;
+# padding: 12px;
+# margin-bottom: 14px;
+# }
+#
+# .semester h4 {
+#     margin: 0 0 8px;
+# font-weight: 600;
+# color: var(--green);
+# }
+#
+# .classes input {
+#     width: 100%;
+# padding: 8px;
+# margin-bottom: 6px;
+# border-radius: 8px;
+# border: 1px solid #ddd;
+# text-align: center;
+# font-size: 14px;
+# }
+#
+# .add {
+#     background: none;
+# border: none;
+# color: var(--pink);
+# font-weight: 600;
+# cursor: pointer;
+# padding: 4px 0;
+# }
+#
+# .add:hover {
+#     text-decoration: underline;
+# }
+#
+# #calcBtn {
+# display: block;
+# margin: 30px auto 0;
+# padding: 14px 36px;
+# font-size: 16px;
+# border-radius: 999px;
+# border: none;
+# cursor: pointer;
+# background: var(--green);
+# color: white;
+# box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+# }
+#
+# #result {
+# text-align: center;
+# margin-top: 20px;
+# font-size: 22px;
+# font-weight: 600;
+# color: var(--pink);
+# }
+# </style>
+#   </head>
+#
+#     <body>
+#
+#     <h1>🍉 High School GPA Calculator By: Sid Shah</h1>
+#                                                    <div class="intro">
+# <strong>How to Use This Calculator:</strong><br>
+# This calculator is only for counties using <strong>semester-based GPAs</strong>.
+# Simply add your <strong>SEMESTER letter grade</strong> (e.g. A, B, C, D)
+# to each class for each year (typically 14 grades total).
+# If you haven’t taken 7 classes or haven’t reached a grade yet,
+# just leave it blank — calculations stay the same.
+# </div>
+#
+# <div class="grid" id="grid"></div>
+#
+# <button id="calcBtn" onclick="calculateGPA()">Calculate GPA</button>
+# <div id="result"></div>
+#
+# <script>
+# const grid = document.getElementById("grid");
+# const years = [9, 10, 11, 12];
+#
+# years.forEach(year => {
+#     const yearDiv = document.createElement("div");
+# yearDiv.className = "year";
+# yearDiv.innerHTML = `<h2>Grade ${year}</h2>`;
+#
+# [1, 2].forEach(sem => {
+#     const semDiv = document.createElement("div");
+# semDiv.className = "semester";
+#
+# semDiv.innerHTML = `
+#                    <h4>Semester ${sem}</h4>
+#                                         <div class="classes">
+# <input class="grade" placeholder="Class 1">
+# </div>
+# <button class="add" onclick="addClass(this)">+ Add Class</button>
+# `;
+#
+# yearDiv.appendChild(semDiv);
+# });
+#
+# grid.appendChild(yearDiv);
+# });
+#
+# function addClass(button) {
+#     const classes = button.previousElementSibling;
+# const count = classes.children.length + 1;
+#
+# const input = document.createElement("input");
+# input.className = "grade";
+# input.placeholder = `Class ${count}`;
+#
+# classes.appendChild(input);
+# }
+#
+# function calculateGPA() {
+#     const map = { A:4, B:3, C:2, D:1, F:0 };
+# const grades = document.querySelectorAll(".grade");
+#
+# let total = 0;
+# let count = 0;
+#
+# grades.forEach(g => {
+#     const val = g.value.trim().toUpperCase();
+# if (map[val] !== undefined) {
+# total += map[val];
+# count++;
+# }
+# });
+#
+# document.getElementById("result").textContent =
+# count === 0
+# ? "Enter at least one valid grade"
+# : `GPA: ${(total / count).toFixed(2)} (${count} classes)`;
+# }
+# </script>
+#
+#   </body>
+#     </html>
